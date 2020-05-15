@@ -1,0 +1,11 @@
+{
+  "name": "WebSocket-Chat",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:morormo/WebSocket-Chat.git",
+  "author": "Morormo <morormo@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "4.17.1"
+  }
+}
