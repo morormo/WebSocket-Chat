@@ -30,17 +30,21 @@ const login = () => {
   }
 };
 
-const sendMessage = () => {
-  event.preventDefault();
+function sendMessage(e) {
+  e.preventDefault();
 
-  if(messageContentInput.value == ''){
-    alert('Type your message');
-  } else {
-    addMessage(userName, messageContentInput.value);
-    socket.emit('message', { author: userName, content: messageContentInput.value })
-    messageContentInput.value= '';
+  let messageContent = messageContentInput.value;
+
+  if(!messageContent.length) {
+    alert('You have to type something!');
   }
-};
+  else {
+    addMessage(userName, messageContent);
+    socket.emit('message', { author: userName, content: messageContent })
+    messageContentInput.value = '';
+  }
+
+}
 
 function addMessage(author, content) {
   const message = document.createElement('li');

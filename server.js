@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const socket = require('socket.io');
+const io = socket(server);
 
 const app = express();
 
@@ -15,8 +16,6 @@ app.get('*', (req, res) => {
 const server = app.listen(8000, () => {
   console.log('Server is running on port: 8000');
 });
-
-const io = socket(server);
 
 io.on('connection', (socket) => {
   console.log('New client! Its id – ' + socket.id);
