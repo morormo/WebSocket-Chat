@@ -9,6 +9,8 @@ const socket = io();
 let userName= '';
 
 socket.on('message', ({ author, content }) => addMessage(author, content))
+socket.on('logged', ({ name }) => addMessage('Chat Boy', `${name} has joined the conversation!`));
+socket.on('disconnected', ({ name }) => addMessage('Chat Boy', `${name} has left the conversation!`));
 
 loginForm.addEventListener('submit', (event) => {
   login(event);
@@ -24,7 +26,8 @@ const login = () => {
   if(userNameInput.value == '') {
     alert('Type your name');
   } else {
-    userName == userNameInput.value;
+    userName = userNameInput.value;
+    socket.emit('logged', { name: userName, id: socket.id});
     loginForm.classList.remove('show');
     messagesSection.classList.add('show');
   }
@@ -43,7 +46,6 @@ function sendMessage(e) {
     socket.emit('message', { author: userName, content: messageContent })
     messageContentInput.value = '';
   }
-
 }
 
 function addMessage(author, content) {
